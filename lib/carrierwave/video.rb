@@ -18,7 +18,9 @@ module CarrierWave
       def encode_video(target_format, options={})
         process encode_video: [target_format, options]
       end
-
+      def get_thumb(target_format, resolution,time)
+        process get_thumb: [target_format,resolution,time]
+      end
       def encode_ogv(opts={})
         process encode_ogv: [opts]
       end
@@ -38,7 +40,21 @@ module CarrierWave
         File.rename tmp_path, current_path
       end
     end
+    def get_thumb(format, resolution, time)
+      cache_stored_file! if !cached?
+      tmp_path = File.join( File.dirname(current_path), "tmpfile.#{format}")
+      file ::FFMPEG::Movie.new(current_path)
+      if opts[:resolution] == :same
+        @options.format_options[:resolution] = file.resolution
+      end
+      yield(file, @options.format_options) if block_given?
 
+      with_trancoding_callbacks do
+        file.screenshot(tmp_path, :seek_time => time, :resolution => resolution)
+        File.rename tmp_path, current_path
+      end
+
+    end
     def encode_video(format, opts={})
       # move upload to local cache
       cache_stored_file! if !cached?
