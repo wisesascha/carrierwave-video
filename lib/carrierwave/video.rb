@@ -44,16 +44,14 @@ module CarrierWave
       cache_stored_file! if !cached?
       tmp_path = File.join( File.dirname(current_path), "tmpfile.#{format}")
       file ::FFMPEG::Movie.new(current_path)
-      if opts[:resolution] == :same
-        @options.format_options[:resolution] = file.resolution
-      end
+      #if opts[:resolution] == :same
+      #  @options.format_options[:resolution] = file.resolution
+      #end
       yield(file, @options.format_options) if block_given?
-
       with_trancoding_callbacks do
         file.screenshot(tmp_path, :seek_time => time, :resolution => resolution)
         File.rename tmp_path, current_path
       end
-
     end
     def encode_video(format, opts={})
       # move upload to local cache
