@@ -70,6 +70,7 @@ module CarrierWave
       with_trancoding_callbacks do
         file.transcode(tmp_path, @options.format_params, @options.encoder_options)
         File.rename tmp_path, current_path
+        system('qtfaststart ' + current_path)
       end
     end
 
