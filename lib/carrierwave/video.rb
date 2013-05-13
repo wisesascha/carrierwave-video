@@ -43,7 +43,7 @@ module CarrierWave
     def get_thumb(format, resolution, time)
       cache_stored_file! if !cached?
       tmp_path = File.join( File.dirname(current_path), "tmpfile.#{format}")
-      file ::FFMPEG::Movie.new(current_path)
+      file = ::FFMPEG::Movie.new(current_path)
       #if opts[:resolution] == :same
       #  @options.format_options[:resolution] = file.resolution
       #end
