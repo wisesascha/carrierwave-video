@@ -48,10 +48,10 @@ module CarrierWave
       #  @options.format_options[:resolution] = file.resolution
       #end
       yield(file, @options.format_options) if block_given?
-      with_trancoding_callbacks do
+ #     with_trancoding_callbacks do
         file.screenshot(tmp_path, :seek_time => time, :resolution => resolution)
         File.rename tmp_path, current_path
-      end
+  #    end
     end
     def encode_video(format, opts={})
       # move upload to local cache
