@@ -74,7 +74,8 @@ module CarrierWave
           file.transcode(tmp_path, @options.format_params, @options.encoder_options) {
               |value|
                 progress.call(value)
-                logger.info(value)
+                puts value
+
           }
         else
           file.transcode(tmp_path, @options.format_params, @options.encoder_options)
