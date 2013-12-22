@@ -23,13 +23,8 @@ module CarrierWave
         model.send(@logger) if @logger.present?
       end
 
-      def progress(model)
-        if @progress
-          args = model.method(@progress).arity == 3 ? [@format, @format_options] : []
-          lambda { |val| model.send(@progress, *(args + [val])) }
-        end
-      end
-
+      def progress
+        @progress
       def encoder_options
         { preserve_aspect_ratio: :width }
       end
