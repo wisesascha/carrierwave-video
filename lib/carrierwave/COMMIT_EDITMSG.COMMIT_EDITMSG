@@ -1,0 +1,21 @@
+Added debug message
+
+# --------------
+# Please enter the commit message for your changes. Everything below
+# this paragraph is ignored, and an empty message aborts the commit.
+# Just close the window to accept your message.
+diff --git a/lib/carrierwave/video.rb b/lib/carrierwave/video.rb
+index a8b702e..a96e22c 100644
+--- a/lib/carrierwave/video.rb
++++ b/lib/carrierwave/video.rb
+@@ -72,7 +72,9 @@ module CarrierWave
+       with_trancoding_callbacks do
+         if progress
+           file.transcode(tmp_path, @options.format_params, @options.encoder_options) {
+-              |value| progress.call(value)
++              |value|
++                progress.call(value)
++                logger.info(value)
+           }
+         else
+           file.transcode(tmp_path, @options.format_params, @options.encoder_options)

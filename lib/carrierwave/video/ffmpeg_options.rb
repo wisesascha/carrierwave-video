@@ -25,6 +25,7 @@ module CarrierWave
 
       def progress
         @progress
+      end
       def encoder_options
         { preserve_aspect_ratio: :width }
       end
