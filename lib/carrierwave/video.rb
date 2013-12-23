@@ -74,7 +74,7 @@ module CarrierWave
           puts "Progress Found"
           file.transcode(tmp_path, @options.format_params, @options.encoder_options) {
             |value|
-            #model.method(@options.progress).call(value)
+            model.method(@options.progress).call(value)
             puts value
 
           }
