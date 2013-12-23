@@ -68,13 +68,14 @@ module CarrierWave
       yield(file, @options.format_options) if block_given?
 
      
-
+      puts "Puts is Working"
       with_trancoding_callbacks do
-        if progress
+        if @options.progress
+          puts "Progress Found"
           file.transcode(tmp_path, @options.format_params, @options.encoder_options) {
-              |value|
-                model.method(@options.progress).call(value)
-                puts value
+            |value|
+            #model.method(@options.progress).call(value)
+            puts value
 
           }
         else
