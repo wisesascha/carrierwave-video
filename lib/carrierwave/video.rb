@@ -56,7 +56,7 @@ module CarrierWave
     def encode_video(format, opts={})
       # move upload to local cache
       cache_stored_file! if !cached?
-      ::FFMPEG::Transcoder.timeout = 50
+      ::FFMPEG::Transcoder.timeout = 100
       @options = CarrierWave::Video::FfmpegOptions.new(format, opts)
       tmp_path = File.join( File.dirname(current_path), "tmpfile.#{format}" )
       file = ::FFMPEG::Movie.new(current_path)
